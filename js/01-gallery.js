@@ -4,7 +4,6 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 
 const gallery = document.querySelector(".gallery");
-const galleryItem = document.querySelector(".gallery__item").outerHTML;
 
 let galleryString = "";
 
@@ -65,22 +64,30 @@ alt: "Lighthouse Coast Sea",
 ];
 
 images.forEach(image => {
-    let newGalleryItem = galleryItem.replaceAll("large-image.jpg", image.large);
-    newGalleryItem = newGalleryItem.replace("small-image.jpg", image.small);
-    newGalleryItem = newGalleryItem.replace("Image description", image.alt);
-    galleryString += newGalleryItem; 
+    galleryString +=   
+    `<li class="gallery__item">
+        <a class="gallery__link" href="${image.large}">
+            <img
+            class="gallery__image"
+            src="${image.small}"
+            data-source="${image.large}"
+            alt="${image.alt}"
+            />
+        </a>
+    </li>`;
 });
 
 gallery.innerHTML = galleryString;
 
-gallery.addEventListener("click", showBigImage);
-document.addEventListener("keydown", showBigImage);
+
+gallery.addEventListener("click", showHideModal);
+document.addEventListener("keydown", showHideModal);
 
 let instance;
 
-function showBigImage(event) {
+function showHideModal(event) {
     if (event.type === "click" && event.target.className === "gallery__image") {      
-        instance = basicLightbox.create(`<img src="${event.target.dataset.source}" width="800" height="600">`);
+        instance = basicLightbox.create(`<img src="${event.target.dataset.source}">`);
 
         instance.show();
     }
