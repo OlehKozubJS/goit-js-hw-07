@@ -83,12 +83,6 @@ let instance;
 function showHideModal(event) {
     if (event.type === "click" && event.target.className === "gallery__image") {      
         instance = new SimpleLightbox('.gallery a', { /* options */ });
-
-        instance.open(event.target);
-    }
-
-    if (event.type === "keydown" && event.key === "Escape") {
-        instance.close();
     }
 }
 
