@@ -66,7 +66,7 @@ alt: "Lighthouse Coast Sea",
 images.forEach(image => {
     galleryString +=   
     `<li class="gallery__item">
-        <a class="gallery__link" href="${image.large}">
+        <a class="gallery__link" href="${image.large}" onclick="return false">
             <img
             class="gallery__image"
             src="${image.small}"
@@ -80,20 +80,27 @@ images.forEach(image => {
 gallery.innerHTML = galleryString;
 
 
-gallery.addEventListener("click", showHideModal);
-document.addEventListener("keydown", showHideModal);
-
+gallery.addEventListener("click", showModal);
 let instance;
 
-function showHideModal(event) {
-    if (event.type === "click" && event.target.className === "gallery__image") {      
-        instance = basicLightbox.create(`<img src="${event.target.dataset.source}">`);
-
+function showModal(event) {
+    if (event.target.className === "gallery__image") {      
+        instance = basicLightbox.create(`<img src="${event.target.dataset.source}">`,
+            {
+                onShow: () => {
+                    document.addEventListener("keydown", hideModal);
+                },
+                onHide: () => {
+                    document.removeEventListener(hideModal);
+                }
+            }
+        );
         instance.show();
-    }
-
-    if (event.type === "keydown" && event.key === "Escape") {
-        instance.close();
     }
 }
 
+function hideModal(event) {
+    if (event.key === "Escape") {
+        instance.close();
+    }
+}
