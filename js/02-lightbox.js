@@ -74,16 +74,10 @@ images.forEach(image => {
 
 gallery.innerHTML = galleryString;
 
-
-gallery.addEventListener("click", showHideModal);
-document.addEventListener("keydown", showHideModal);
-
-let instance;
-
-function showHideModal(event) {
-    if (event.type === "click" && event.target.className === "gallery__image") {      
-        instance = new SimpleLightbox('.gallery a', { /* options */ });
-    }
-}
+let instance = new SimpleLightbox('.gallery a', {
+            captionsData: "alt",
+            captionDelay: 250,
+            disableScroll: false,
+        });
 
 
