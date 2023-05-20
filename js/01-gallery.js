@@ -84,8 +84,8 @@ let galleryLinks = document.querySelectorAll(".gallery__link");
 galleryLinks.forEach(
     galleryLink => {
         galleryLink.addEventListener("click",
-            e => {
-                e.preventDefault();
+            event => {
+                event.preventDefault();
             }
         );
     }
