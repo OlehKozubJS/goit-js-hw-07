@@ -18,10 +18,12 @@ galleryItems.forEach(image => {
 
 gallery.innerHTML = galleryString;
 
-let instance = new SimpleLightbox('.gallery a', {
-            captionsData: "alt",
-            captionDelay: 250,
-            disableScroll: false,
-        });
+let instance = new SimpleLightbox('.gallery a', 
+    {
+        captionsData: "alt",
+        captionDelay: 250,
+        disableScroll: false,
+    }
+);
 
 
