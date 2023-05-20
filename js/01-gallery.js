@@ -66,7 +66,7 @@ alt: "Lighthouse Coast Sea",
 images.forEach(image => {
     galleryString +=   
     `<li class="gallery__item">
-        <a class="gallery__link" href="${image.large}" onclick="return false">
+        <a class="gallery__link" href="${image.large}">
             <img
             class="gallery__image"
             src="${image.small}"
@@ -79,8 +79,20 @@ images.forEach(image => {
 
 gallery.innerHTML = galleryString;
 
+let galleryLinks = document.querySelectorAll(".gallery__link");
+
+galleryLinks.forEach(
+    galleryLink => {
+        galleryLink.addEventListener("click",
+            e => {
+                e.preventDefault();
+            }
+        );
+    }
+);
 
 gallery.addEventListener("click", showModal);
+
 let instance;
 
 function showModal(event) {
