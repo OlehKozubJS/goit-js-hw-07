@@ -23,31 +23,21 @@ galleryItems.forEach(image => {
 
 gallery.innerHTML = galleryString;
 
-let galleryLinks = document.querySelectorAll(".gallery__link");
-
-galleryLinks.forEach(
-    galleryLink => {
-        galleryLink.addEventListener("click",
-            event => {
-                event.preventDefault();
-            }
-        );
-    }
-);
-
 gallery.addEventListener("click", showModal);
 
 let instance;
 
 function showModal(event) {
+    event.preventDefault();
+
     if (event.target.className === "gallery__image") {      
         instance = basicLightbox.create(`<img src="${event.target.dataset.source}">`,
             {
                 onShow: () => {
                     document.addEventListener("keydown", hideModal);
                 },
-                onHide: () => {
-                    document.removeEventListener(hideModal);
+                onClose: () => {
+                    document.removeEventListener("keydown", hideModal);
                 }
             }
         );
